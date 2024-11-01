@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 
 /* Main container */
 .ws-homepage {
@@ -13,7 +12,7 @@ body {
   background: linear-gradient(180deg, #fdfbc9 54.1%, #f9d67b);
   min-height: 100vh;
   overflow-x: hidden;
-  text-align: left;
+  text-align: center;
   color: #8a252c;
   font-family: var(--font-montserrat);
   padding-top: 76px; /* Add padding to account for fixed navbar */
@@ -28,13 +27,35 @@ body {
   width: 100%;
   height: 76px;
   z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.nav-toggle {
+  display: none;
+  margin-right: 1.5rem;
+  border: none;
+  background-color: #fffee9;
+  cursor: pointer;
+}
+
+.nav-toggle-icon {
+  width: 1.5rem;
+  height: auto;
+  color: #8a252c;
 }
 
 /* Title */
 .WSTitle {
-  position: fixed;
-  top: -19px;
-  left: 31px;
   width: 115px;
   height: 113px;
   object-fit: cover;
@@ -42,28 +63,43 @@ body {
 }
 
 /* Navigation Links */
-.NHome, .NReports, .NLeaderboards, .NInsight, .NProfile {
-  position: fixed;
-  display: inline-block;
-  top: 26px;
+.NHome,
+.NReports,
+.NLeaderboards,
+.NInsight,
+.NProfile {
   font-size: 20px;
-  height: 23px;
   cursor: pointer;
   z-index: 1001;
 }
 
-.NHome { left: 710px; width: 63px; }
-.NReports { left: 870px; width: 82px; }
-.NLeaderboards { left: 1020px; width: 139px; }
-.NInsight { left: 1210px; width: 139px; }
-.NProfile { left: 1350px; width: 65px; }
+/* .NHome {
+  left: 710px;
+  width: 63px;
+}
+.NReports {
+  left: 870px;
+  width: 82px;
+}
+.NLeaderboards {
+  left: 1020px;
+  width: 139px;
+}
+.NInsight {
+  left: 1210px;
+  width: 139px;
+}
+.NProfile {
+  left: 1350px;
+  width: 65px;
+} */
 
 /* Main heading */
 .HWildcat {
   position: relative;
   margin-top: 24px;
-  left: 40%;
-  transform: translateX(-50%);
+  /* left: 40%;
+  transform: translateX(-50%); */
   font-size: 64px;
   width: 323px;
   height: 77px;
@@ -75,7 +111,7 @@ body {
   width: 100%;
   height: auto;
   max-width: 613px;
-  margin: 20px auto; 
+  margin: 20px auto;
   padding: 20px;
   background-color: #fdfdd7;
   border-radius: 10px;
@@ -105,7 +141,7 @@ body {
 }
 
 .close-button:hover {
-  color: #8A252C;
+  color: #8a252c;
   border-radius: 50%;
 }
 
@@ -177,6 +213,7 @@ body {
   width: 460px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
@@ -186,7 +223,8 @@ body {
   gap: 10px;
 }
 
-.gallery-icon, .mic-icon {
+.gallery-icon,
+.mic-icon {
   width: 18px;
   height: 18px;
   display: flex;
@@ -194,7 +232,8 @@ body {
   transition: transform 0.2s ease-in-out;
 }
 
-.gallery-icon:hover, .mic-icon:hover {
+.gallery-icon:hover,
+.mic-icon:hover {
   transform: scale(1.4);
 }
 
@@ -229,12 +268,12 @@ body {
 .post-list {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 100%;
-  max-width: 613px; 
+  max-width: 613px;
   padding-bottom: 40px;
   padding-top: 10px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .post-container .post-header {
@@ -243,8 +282,8 @@ body {
 
 .post-list .post-card {
   width: 100%;
-  max-width: 613px; 
-  margin-bottom: 5px; 
+  max-width: 613px;
+  margin-bottom: 5px;
 }
 
 /* Post Card */
@@ -252,7 +291,7 @@ body {
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   margin-top: 20px; /* Adds space between AdPost and AdPostContainer */
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 20px;
 }
@@ -409,7 +448,7 @@ body {
 }
 
 .MuiDialogTitle-root {
-  background-color: #8A252C !important;
+  background-color: #8a252c !important;
   color: white !important;
   padding: 16px 24px !important;
   text-align: left !important;
@@ -432,7 +471,7 @@ body {
 .MuiDialogActions-root button {
   margin: 0 10px !important;
   min-width: 100px !important;
-  background-color: #8A252C !important;
+  background-color: #8a252c !important;
   color: white !important;
   border: none !important;
   border-radius: 5px !important;
@@ -447,11 +486,11 @@ body {
 }
 
 .MuiDialogActions-root .cancel-button {
-  background-color: #8A252C !important;
+  background-color: #8a252c !important;
 }
 
 .MuiDialogActions-root .delete-button {
-  background-color: #8A252C !important;
+  background-color: #8a252c !important;
 }
 
 .MuiDialogActions-root .cancel-button:hover,
@@ -489,7 +528,7 @@ body {
 }
 
 .user-info {
-  color: #8A252C;
+  color: #8a252c;
   font-weight: bold;
 }
 
@@ -553,7 +592,7 @@ body {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transform: scale(1.0);
+  transform: scale(1);
 }
 
 .exit-icon:hover {
@@ -567,7 +606,7 @@ body {
   padding: 8px 15px;
   cursor: pointer;
   color: white;
-  background-color: #8A252C;
+  background-color: #8a252c;
   transition: all 0.3s ease;
 }
 
@@ -577,7 +616,39 @@ body {
 }
 
 @media (max-width: 768px) {
-  .NHome, .NReports, .NLeaderboards, .NInsight, .NProfile {
+  /* Navigation Toggle */
+  .nav-toggle {
+    display: block;
+  }
+  /* Title */
+  .WSTitle {
+    width: 115px;
+    height: 113px;
+    margin-left: 1.3rem;
+    object-fit: cover;
+    z-index: 1001;
+  }
+  /* Navbar */
+  .WSNavbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fffee9;
+    width: 100%;
+    height: 76px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-links {
+    display: none;
+  }
+  /* .NHome,
+  .NReports,
+  .NLeaderboards,
+  .NInsight,
+  .NProfile {
     position: fixed !important;
     display: inline-block;
     top: 26px;
@@ -586,17 +657,32 @@ body {
     cursor: pointer;
     z-index: 1001;
   }
-  
-  .NHome { left: 230px; width: 63px !important; }
-  .NReports { left: 330px; width: 82px; }
-  .NLeaderboards { left: 420px; width: 100px; }
-  .NInsight { left: 560px; width: 100px; }
-  .NProfile { left: 650px; width: 65px; }
+
+  .NHome {
+    left: 230px;
+    width: 63px !important;
+  }
+  .NReports {
+    left: 330px;
+    width: 82px;
+  }
+  .NLeaderboards {
+    left: 420px;
+    width: 100px;
+  }
+  .NInsight {
+    left: 560px;
+    width: 100px;
+  }
+  .NProfile {
+    left: 650px;
+    width: 65px;
+  } */
 
   .HWildcat {
     position: relative !important;
-    left: 31%;
-    transform: translateX(-50%);
+    /* left: 31%;
+    transform: translateX(-50%); */
     width: 323px;
     height: 77px;
   }
@@ -608,7 +694,11 @@ body {
 }
 
 @media (max-width: 500px) {
-  .NHome, .NReports, .NLeaderboards, .NInsight, .NProfile {
+  /* .NHome,
+  .NReports,
+  .NLeaderboards,
+  .NInsight,
+  .NProfile {
     position: fixed !important;
     display: inline-block;
     top: 26px;
@@ -617,14 +707,29 @@ body {
     cursor: pointer;
     z-index: 1001;
   }
-  
-  .NHome { left: 165px; width: 63px !important; }
-  .NReports { left: 220px; width: 82px; }
-  .NLeaderboards { left: 280px; width: 100px; }
-  .NInsight { left: 382px; width: 100px; }
-  .NProfile { left: 440px; width: 65px; }
 
-  .HWildcat {
+  .NHome {
+    left: 165px;
+    width: 63px !important;
+  }
+  .NReports {
+    left: 220px;
+    width: 82px;
+  }
+  .NLeaderboards {
+    left: 280px;
+    width: 100px;
+  }
+  .NInsight {
+    left: 382px;
+    width: 100px;
+  }
+  .NProfile {
+    left: 440px;
+    width: 65px;
+  } */
+
+  /* .HWildcat {
     position: relative !important;
     margin-top: 24px;
     left: 20%;
@@ -633,7 +738,7 @@ body {
     width: 323px;
     height: 77px;
     text-align: center;
-  }
+  } */
 
   .post-container {
     width: 85%;
@@ -654,7 +759,7 @@ body {
     overflow-y: auto;
     padding: 10px;
   }
-  
+
   .post-form {
     width: auto;
     display: flex;
@@ -675,7 +780,7 @@ body {
 
   .post-form form input {
     border: none;
-    width: 400px;
+    width: 100%;
     height: 35px;
     border-radius: 20px;
     border-color: #8a252c;
@@ -725,7 +830,7 @@ body {
   }
 
   .close-button {
-      position: relative;
-      left: -110px; 
+    position: relative;
+    left: -110px;
   }
 }

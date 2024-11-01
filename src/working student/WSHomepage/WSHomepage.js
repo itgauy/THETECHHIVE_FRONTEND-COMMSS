@@ -79,17 +79,17 @@ const WSHomepage = () => {
       const userPermissionsKey = `userPermissionsSet_${loggedInUser.userId}`;
       const hasSetPermissions = localStorage.getItem(userPermissionsKey);
       const sessionPermissionsShown = sessionStorage.getItem(`permissionsShown_${loggedInUser.userId}`);
-      
+
       // Generate a unique session key for schema reset detection
       const uniqueUserSessionKey = `uniqueUserSession_${loggedInUser.userId}`;
       const uniqueUserSession = `${schemaTimestamp}_${loggedInUser.userId}`;
       const storedUniqueUserSession = localStorage.getItem(uniqueUserSessionKey);
-  
+
       // Check if we need to reset permissions
-      const shouldResetPermissions = 
-        storedSchemaTimestamp !== schemaTimestamp || 
+      const shouldResetPermissions =
+        storedSchemaTimestamp !== schemaTimestamp ||
         storedUniqueUserSession !== uniqueUserSession;
-  
+
       if (shouldResetPermissions) {
         // Clear all permission-related storage for this user
         const keysToRemove = [
@@ -99,55 +99,55 @@ const WSHomepage = () => {
           `cameraPermission_${loggedInUser.userId}`,
           userPermissionsKey
         ];
-        
+
         keysToRemove.forEach(key => localStorage.removeItem(key));
         sessionStorage.removeItem(`permissionsShown_${loggedInUser.userId}`);
-  
+
         // Set new schema timestamp and session
         localStorage.setItem('schemaTimestamp', schemaTimestamp);
         localStorage.setItem(uniqueUserSessionKey, uniqueUserSession);
       }
-  
+
       // Show permissions dialogs if not previously set
       if (!hasSetPermissions && !sessionPermissionsShown) {
         const locationPermission = localStorage.getItem(`locationPermission_${loggedInUser.userId}`);
         const cameraPermission = localStorage.getItem(`cameraPermission_${loggedInUser.userId}`);
-  
+
         if (!locationPermission) {
           setIsLocationDialogOpen(true);
         } else if (!cameraPermission) {
           setIsCameraDialogOpen(true);
         }
-  
+
         // Mark permissions as shown for this session
         sessionStorage.setItem(`permissionsShown_${loggedInUser.userId}`, 'true');
       }
     }
   }, [loggedInUser]);
-  
+
   const handleLocationPermission = (permission) => {
     console.log(`Location permission granted: ${permission}`);
     localStorage.setItem(`locationPermission_${loggedInUser.userId}`, permission);
     setIsLocationDialogOpen(false);
-    
+
     // Show camera permission dialog next
     setIsCameraDialogOpen(true);
-  
+
     // Check if both permissions are now set
     const cameraPermission = localStorage.getItem(`cameraPermission_${loggedInUser.userId}`);
     if (cameraPermission) {
       localStorage.setItem(`userPermissionsSet_${loggedInUser.userId}`, 'true');
     }
   };
-  
+
   const handleCameraPermission = (permission) => {
     console.log(`Camera permission granted: ${permission}`);
     localStorage.setItem(`cameraPermission_${loggedInUser.userId}`, permission);
     setIsCameraDialogOpen(false);
-  
+
     // Set permissions as complete
     localStorage.setItem(`userPermissionsSet_${loggedInUser.userId}`, 'true');
-  
+
     if (permission === "never") {
       // Handle manual file upload logic if camera is denied
     }
@@ -161,7 +161,7 @@ const WSHomepage = () => {
         // Sort posts by timestamp in descending order to show the newest first
         const sortedPosts = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         setPosts(sortedPosts);
-  
+
         // Fetch profile pictures for each post owner
         const userIds = new Set(sortedPosts.map(post => post.userId));
         userIds.forEach(userId => fetchUserProfilePicture(userId));
@@ -171,9 +171,9 @@ const WSHomepage = () => {
     };
     fetchPostsAndPictures();
   }, [fetchUserProfilePicture]);
-  
-  
-  
+
+
+
   useEffect(() => {
     if (currentPostId) {
       const fetchCommentsAndPictures = async () => {
@@ -182,26 +182,26 @@ const WSHomepage = () => {
             axios.get(`http://localhost:8080/comments/${currentPostId}`),
             axios.get(`http://localhost:8080/posts/${currentPostId}`)
           ]);
-  
-         const sortedComments = commentsResponse.data
-  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-  .map(comment => {
-    // Truncate the microseconds to milliseconds for moment.js compatibility
-    const truncatedTimestamp = comment.timestamp.substring(0, 23); // Keep only up to milliseconds
 
-    // Pass the truncated timestamp to moment
-    const momentTimestamp = moment(truncatedTimestamp, 'YYYY-MM-DD HH:mm:ss.SSS');
-    
-    console.log("Comment raw timestamp:", comment.timestamp); // Log the raw timestamp
-    console.log("Truncated timestamp:", truncatedTimestamp); // Log the truncated timestamp
-    console.log("Formatted timestamp for comment:", momentTimestamp.format()); // Log formatted timestamp
-    
-    return {
-      ...comment,
-      relativeTime: momentTimestamp.isValid() ? momentTimestamp.fromNow() : "Invalid date"
-    };
+          const sortedComments = commentsResponse.data
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .map(comment => {
+              // Truncate the microseconds to milliseconds for moment.js compatibility
+              const truncatedTimestamp = comment.timestamp.substring(0, 23); // Keep only up to milliseconds
+
+              // Pass the truncated timestamp to moment
+              const momentTimestamp = moment(truncatedTimestamp, 'YYYY-MM-DD HH:mm:ss.SSS');
+
+              console.log("Comment raw timestamp:", comment.timestamp); // Log the raw timestamp
+              console.log("Truncated timestamp:", truncatedTimestamp); // Log the truncated timestamp
+              console.log("Formatted timestamp for comment:", momentTimestamp.format()); // Log formatted timestamp
+
+              return {
+                ...comment,
+                relativeTime: momentTimestamp.isValid() ? momentTimestamp.fromNow() : "Invalid date"
+              };
             });
-  
+
           setComments(sortedComments);
           setCurrentPostOwner(postResponse.data.userId);
         } catch (error) {
@@ -211,7 +211,7 @@ const WSHomepage = () => {
       fetchCommentsAndPictures();
     }
   }, [currentPostId, fetchUserProfilePicture]);
-  
+
 
   const fetchLoggedInUsers = useCallback(() => {
     const user = JSON.parse(localStorage.getItem("loggedInUser")) || null;
@@ -244,7 +244,7 @@ const WSHomepage = () => {
         prevComments.map(comment => {
           const momentDate = moment(comment.timestamp, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
           const isValidDate = momentDate.isValid();
-  
+
           return {
             ...comment,
             relativeTime: isValidDate ? momentDate.fromNow() : 'Invalid date',
@@ -252,7 +252,7 @@ const WSHomepage = () => {
         }).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
       );
     }, 60000); // Updates every minute
-  
+
     return () => clearInterval(timer);
   }, []);
 
@@ -299,7 +299,7 @@ const WSHomepage = () => {
       reader.readAsDataURL(file);
     }
   };
-  
+
   // Function to fetch profile picture
   const fetchProfilePicture = useCallback(async (userId) => {
     try {
@@ -320,7 +320,7 @@ const WSHomepage = () => {
       setProfilePicture(defaultProfile);
     }
   }, [defaultProfile]);
-  
+
 
   // Fetch logged in user data and profile picture on component mount
   useEffect(() => {
@@ -328,7 +328,7 @@ const WSHomepage = () => {
     if (user) {
       fetchProfilePicture(user.userId);
     }
-  }, [fetchLoggedInUsers, fetchProfilePicture]); 
+  }, [fetchLoggedInUsers, fetchProfilePicture]);
 
   const handleMicClick = () => {
     if (!("webkitSpeechRecognition" in window)) return;
@@ -348,17 +348,17 @@ const WSHomepage = () => {
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!newPostContent && !imagePreview) {
       alert("Please enter a post or select a picture before submitting.");
       return;
     }
-  
+
     if (!loggedInUser) {
       alert("Please log in to post.");
       return;
     }
-  
+
     const newPost = {
       content: newPostContent.trim() || '',  // Ensure content is empty if there's no text
       image: imagePreview,                   // The image preview (optional)
@@ -371,20 +371,20 @@ const WSHomepage = () => {
       points: 0,
       timestamp: new Date().toISOString(),   // Add timestamp at the time of creation
     };
-  
+
     try {
       const response = await axios.post("http://localhost:8080/posts/add", newPost, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
-  
+
       // Sort the posts immediately after adding the new post
       setPosts(prevPosts => {
         const updatedPosts = [response.data, ...prevPosts];
         return updatedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
       });
-  
+
       setNewPostContent("");  // Reset the content
       setSelectedFile(null);  // Clear the selected file
       setImagePreview(null);  // Clear the image preview
@@ -397,7 +397,7 @@ const WSHomepage = () => {
       }
     }
   };
-  
+
 
   const handleLike = async (postId) => {
     if (!loggedInUser) {
@@ -407,14 +407,14 @@ const WSHomepage = () => {
     try {
       const response = await axios.post(`http://localhost:8080/posts/${postId}/like?userId=${loggedInUser.userId}`);
       const updatedPost = response.data;
-      setPosts(posts.map(post => 
+      setPosts(posts.map(post =>
         post.postId === postId ? updatedPost : post
       ));
     } catch (error) {
       console.error("Error liking post:", error);
     }
   };
-  
+
   const handleDislike = async (postId) => {
     if (!loggedInUser) {
       alert("Please log in to dislike posts.");
@@ -423,7 +423,7 @@ const WSHomepage = () => {
     try {
       const response = await axios.post(`http://localhost:8080/posts/${postId}/dislike?userId=${loggedInUser.userId}`);
       const updatedPost = response.data;
-      setPosts(posts.map(post => 
+      setPosts(posts.map(post =>
         post.postId === postId ? updatedPost : post
       ));
     } catch (error) {
@@ -434,32 +434,32 @@ const WSHomepage = () => {
   const handleOpenComments = async (postId) => {
     setCurrentPostId(postId);
     try {
-        const [commentsResponse, postResponse] = await Promise.all([
-            axios.get(`http://localhost:8080/comments/${postId}`),
-            axios.get(`http://localhost:8080/posts/${postId}`)
-        ]);
+      const [commentsResponse, postResponse] = await Promise.all([
+        axios.get(`http://localhost:8080/comments/${postId}`),
+        axios.get(`http://localhost:8080/posts/${postId}`)
+      ]);
 
-        const sortedComments = commentsResponse.data
-            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-            .map(comment => {
-                console.log("Raw timestamp:", comment.timestamp); // Log the raw timestamp
-                const momentTimestamp = moment(comment.timestamp, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
-                console.log("Moment valid:", momentTimestamp.isValid()); // Log if the moment is valid
-                console.log("Formatted timestamp:", momentTimestamp.format()); // Log the formatted timestamp
+      const sortedComments = commentsResponse.data
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+        .map(comment => {
+          console.log("Raw timestamp:", comment.timestamp); // Log the raw timestamp
+          const momentTimestamp = moment(comment.timestamp, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
+          console.log("Moment valid:", momentTimestamp.isValid()); // Log if the moment is valid
+          console.log("Formatted timestamp:", momentTimestamp.format()); // Log the formatted timestamp
 
-                return {
-                    ...comment,
-                    relativeTime: momentTimestamp.isValid() ? momentTimestamp.fromNow() : "Invalid date"
-                };
-            });
+          return {
+            ...comment,
+            relativeTime: momentTimestamp.isValid() ? momentTimestamp.fromNow() : "Invalid date"
+          };
+        });
 
-        setComments(sortedComments);
-        setCurrentPostOwner(postResponse.data.userId);
+      setComments(sortedComments);
+      setCurrentPostOwner(postResponse.data.userId);
     } catch (error) {
-        console.error("Error fetching comments or post details:", error);
+      console.error("Error fetching comments or post details:", error);
     }
     setIsCommentDialogOpen(true);
-};
+  };
 
   const handleCloseComments = () => {
     setIsCommentDialogOpen(false);
@@ -468,15 +468,15 @@ const WSHomepage = () => {
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') return;
-    
+
     const comment = {
       content: newComment,
-      postId: currentPostId,  
+      postId: currentPostId,
       userId: loggedInUser.userId,
       fullName: loggedInUser.fullName,
       idNumber: loggedInUser.idNumber,
     };
-    
+
     try {
       const response = await axios.post('http://localhost:8080/comments/add', comment);
       const newCommentWithRelativeTime = {
@@ -545,132 +545,141 @@ const WSHomepage = () => {
   const formatTimestamp = (timestamp) => {
     console.log("Raw timestamp:", timestamp); // Log the raw timestamp
     const momentDate = moment(timestamp, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
-    
+
     if (!momentDate.isValid()) {
-        console.log("Invalid date format for:", timestamp); // Log if the date is invalid
-        return "Invalid date"; // Handle invalid date
+      console.log("Invalid date format for:", timestamp); // Log if the date is invalid
+      return "Invalid date"; // Handle invalid date
     }
 
     return momentDate.format('dddd, MMMM D, YYYY [at] h:mm A');
-};
+  };
 
-const getRelativeTime = (timestamp) => {
+  const getRelativeTime = (timestamp) => {
     console.log("Raw timestamp for relative time:", timestamp); // Log the raw timestamp for relative time
     const momentDate = moment(timestamp, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
-    
+
     if (!momentDate.isValid()) {
-        console.log("Invalid date format for relative time:", timestamp); // Log if the date is invalid
-        return "Invalid date"; // Handle invalid date
+      console.log("Invalid date format for relative time:", timestamp); // Log if the date is invalid
+      return "Invalid date"; // Handle invalid date
     }
 
     return momentDate.fromNow();
-};
+  };
 
-const handleClosePost = () => {
-  setNewPostContent('');
-  setImagePreview(null);
-  setShowCloseButton(false);
-  setInputHasContent(false);
-  if (fileInputRef.current) {
-    fileInputRef.current.value = '';
-  }
-};
+  const handleClosePost = () => {
+    setNewPostContent('');
+    setImagePreview(null);
+    setShowCloseButton(false);
+    setInputHasContent(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
 
   const fileInputRef = useRef(null);
 
   return (
     <div className="ws-homepage">
-      <div className="WSNavbar" />
-      <img className="WSTitle" alt="" src="/TITLE.png" />
-      <b className="NHome">Home</b>
-      <div className="NReports" onClick={onREPORTSClick}>
-        Report
-      </div>
-      <div className="NProfile" onClick={onPROFILEClick}>
-        Profile
-      </div>
-      <div className="NLeaderboards" onClick={onLEADERBOARDSClick}>
-        Leaderboard
-      </div>
-      <div className="NInsight" onClick={onINSIGHTClick}>
-        Insight
+      <div className="WSNavbar">
+        <img className="WSTitle" alt="" src="/TITLE.png" />
+        <div className="nav-links">
+          <b className="NHome">Home</b>
+          <div className="NReports" onClick={onREPORTSClick}>
+            Report
+          </div>
+          <div className="NProfile" onClick={onPROFILEClick}>
+            Profile
+          </div>
+          <div className="NLeaderboards" onClick={onLEADERBOARDSClick}>
+            Leaderboard
+          </div>
+          <div className="NInsight" onClick={onINSIGHTClick}>
+            Insight
+          </div>
+        </div>
+        {/* Toggle Navigation Button for mobile */}
+        <button className="nav-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="nav-toggle-icon">
+            <path fillRule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+          </svg>
+        </button>
       </div>
       <b className="HWildcat">WILDCAT</b>
-      
+
       <div className="content-wrapper">
-      <div className="post-container">
-        <div className="post-header">
-          {showCloseButton && (
+        <div className="post-container">
+          <div className="post-header">
+            {showCloseButton && (
               <button className="close-button" onClick={handleClosePost}>
                 ×
               </button>
-          )}
-        </div>
-        <div className="logo-container">
-          <img src={profilePicture || defaultProfile} alt="User Avatar" className="users-dp" />
-        </div>
-        <div className="post-form">
-          <form onSubmit={handlePostSubmit}>
-            <input
-              type="text"
-              className="post-input"
-              value={newPostContent}
-              onChange={handlePostInputChange}
-              placeholder="What's happening in your day, Wildcat?"
-            />
-            <div className="post-subcontainer">
-              <div className="post-subcontainer-icons">
-                <label htmlFor="file-upload">
-                  <img className="gallery-icon" alt="" src="/gallery.png" />
-                </label>
-                <input
-                  ref={fileInputRef}
-                  id="file-upload"
-                  type="file"
-                  className="file-input"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
-                  onClick={(e) => { e.target.value = null }}
-                />
-                <img
-                  className="mic-icon"
-                  alt="Mic"
-                  src="/mic.png"
-                  onClick={handleMicClick}
-                  style={{ cursor: "pointer" }}
-                />
+            )}
+          </div>
+          <div className="logo-container">
+            <img src={profilePicture || defaultProfile} alt="User Avatar" className="users-dp" />
+          </div>
+          <div className="post-form">
+            <form onSubmit={handlePostSubmit}>
+              <input
+                type="text"
+                className="post-input"
+                value={newPostContent}
+                onChange={handlePostInputChange}
+                placeholder="What's happening in your day, Wildcat?"
+              />
+              <div className="post-subcontainer">
+                <div className="post-subcontainer-icons">
+                  <label htmlFor="file-upload">
+                    <img className="gallery-icon" alt="" src="/gallery.png" />
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    id="file-upload"
+                    type="file"
+                    className="file-input"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                    onClick={(e) => { e.target.value = null }}
+                  />
+                  <img
+                    className="mic-icon"
+                    alt="Mic"
+                    src="/mic.png"
+                    onClick={handleMicClick}
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="post-button"
+                  variant="contained"
+                  sx={{
+                    borderRadius: "10px",
+                    width: 60,
+                    height: 30,
+                    backgroundColor: "#8A252C",
+                    "&:hover": { backgroundColor: "#A91D3A" },
+                    "&:disabled": { backgroundColor: "#cccccc", color: "#666666" }
+                  }}
+                >
+                  POST
+                </Button>
               </div>
-              <Button
-                type="submit"
-                className="post-button"
-                variant="contained"
-                sx={{
-                  borderRadius: "10px",
-                  width: 60,
-                  height: 30,
-                  backgroundColor: "#8A252C",
-                  "&:hover": { backgroundColor: "#A91D3A" },
-                  "&:disabled": { backgroundColor: "#cccccc", color: "#666666" }
-                }}
-              >
-                POST
-              </Button>
-            </div>
-          </form>
-          {imagePreview && (
-            <div className="image-preview">
-              <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px' }} />
-            </div>
-          )}
+            </form>
+            {imagePreview && (
+              <div className="image-preview">
+                <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px' }} />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
         <div className="post-list">
           {posts.map((post) => (
             <div key={post.postId} className="post-card">
               <div className="card-container">
                 <div className="name-container">
-                <img src={userProfilePictures[post.userId] || defaultProfile} alt="User Avatar" />
+                  <img src={userProfilePictures[post.userId] || defaultProfile} alt="User Avatar" />
                   <h5>{post.fullName} ({post.idNumber})</h5>
                   {loggedInUser && loggedInUser.userId === post.userId && (
                     <img
@@ -700,90 +709,90 @@ const handleClosePost = () => {
                 </div>
                 <div className="footer-line" />
                 <div className="footer-actions">
-                <div className="footer-icons">
-                  <button 
-                    onClick={() => handleLike(post.postId)} 
-                    className={`like-button ${post.likedBy.includes(loggedInUser?.userId) ? 'active' : ''}`}
-                  >
-                    <img src="/t-up.png" alt="Thumbs Up" /> {post.likes}
-                  </button>
-                  <button 
-                    onClick={() => handleDislike(post.postId)} 
-                    className={`dislike-button ${post.dislikedBy.includes(loggedInUser?.userId) ? 'active' : ''}`}
-                  >
-                    <img src="/t-down.png" alt="Thumbs Down" /> {post.dislikes}
-                  </button>
-                </div>
-                <div className="footer-comments">
-                  <button className="comment-button" onClick={() => handleOpenComments(post.postId)}>Comment</button>
+                  <div className="footer-icons">
+                    <button
+                      onClick={() => handleLike(post.postId)}
+                      className={`like-button ${post.likedBy.includes(loggedInUser?.userId) ? 'active' : ''}`}
+                    >
+                      <img src="/t-up.png" alt="Thumbs Up" /> {post.likes}
+                    </button>
+                    <button
+                      onClick={() => handleDislike(post.postId)}
+                      className={`dislike-button ${post.dislikedBy.includes(loggedInUser?.userId) ? 'active' : ''}`}
+                    >
+                      <img src="/t-down.png" alt="Thumbs Down" /> {post.dislikes}
+                    </button>
+                  </div>
+                  <div className="footer-comments">
+                    <button className="comment-button" onClick={() => handleOpenComments(post.postId)}>Comment</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
 
       {/* Modals for Location and Camera Permissions */}
-<Dialog
-  open={isLocationDialogOpen}
-  onClose={null} // Prevents closing on backdrop click
-  disableEscapeKeyDown={true} // Disables the Escape key to close the dialog
->
-  <DialogTitle>Location Access</DialogTitle>
-  <DialogContent>
-    <p>We need location access to submit a report. Choose an option:</p>
-    <FormControl component="fieldset">
-      <RadioGroup onChange={(e) => handleLocationPermission(e.target.value)}>
-        <FormControlLabel
-          value="whileUsing"
-          control={<Radio sx={{ color: "#f6c301", "&.Mui-checked": { color: "#f6c301" } }} />}
-          label="Allow location access while using the app"
-        />
-        <FormControlLabel
-          value="always"
-          control={<Radio sx={{ color: "maroon", "&.Mui-checked": { color: "maroon" } }} />}
-          label="Allow location access always"
-        />
-        <FormControlLabel
-          value="never"
-          control={<Radio sx={{ color: "gray", "&.Mui-checked": { color: "gray" } }} />}
-          label="Never allow location access"
-        />
-      </RadioGroup>
-    </FormControl>
-  </DialogContent>
-</Dialog>
+      <Dialog
+        open={isLocationDialogOpen}
+        onClose={null} // Prevents closing on backdrop click
+        disableEscapeKeyDown={true} // Disables the Escape key to close the dialog
+      >
+        <DialogTitle>Location Access</DialogTitle>
+        <DialogContent>
+          <p>We need location access to submit a report. Choose an option:</p>
+          <FormControl component="fieldset">
+            <RadioGroup onChange={(e) => handleLocationPermission(e.target.value)}>
+              <FormControlLabel
+                value="whileUsing"
+                control={<Radio sx={{ color: "#f6c301", "&.Mui-checked": { color: "#f6c301" } }} />}
+                label="Allow location access while using the app"
+              />
+              <FormControlLabel
+                value="always"
+                control={<Radio sx={{ color: "maroon", "&.Mui-checked": { color: "maroon" } }} />}
+                label="Allow location access always"
+              />
+              <FormControlLabel
+                value="never"
+                control={<Radio sx={{ color: "gray", "&.Mui-checked": { color: "gray" } }} />}
+                label="Never allow location access"
+              />
+            </RadioGroup>
+          </FormControl>
+        </DialogContent>
+      </Dialog>
 
-<Dialog
-  open={isCameraDialogOpen}
-  onClose={null} // Prevents closing on backdrop click
-  disableEscapeKeyDown={true} // Disables the Escape key to close the dialog
->
-  <DialogTitle>Camera Access</DialogTitle>
-  <DialogContent>
-    <p>We need camera access to submit a report. Choose an option:</p>
-    <FormControl component="fieldset">
-      <RadioGroup onChange={(e) => handleCameraPermission(e.target.value)}>
-        <FormControlLabel
-          value="whileUsing"
-          control={<Radio sx={{ color: "#f6c301", "&.Mui-checked": { color: "#f6c301" } }} />}
-          label="Allow camera access while using the app"
-        />
-        <FormControlLabel
-          value="always"
-          control={<Radio sx={{ color: "maroon", "&.Mui-checked": { color: "maroon" } }} />}
-          label="Allow camera access always"
-        />
-        <FormControlLabel
-          value="never"
-          control={<Radio sx={{ color: "gray", "&.Mui-checked": { color: "gray" } }} />}
-          label="Never allow camera access"
-        />
-      </RadioGroup>
-    </FormControl>
-  </DialogContent>
-</Dialog>
+      <Dialog
+        open={isCameraDialogOpen}
+        onClose={null} // Prevents closing on backdrop click
+        disableEscapeKeyDown={true} // Disables the Escape key to close the dialog
+      >
+        <DialogTitle>Camera Access</DialogTitle>
+        <DialogContent>
+          <p>We need camera access to submit a report. Choose an option:</p>
+          <FormControl component="fieldset">
+            <RadioGroup onChange={(e) => handleCameraPermission(e.target.value)}>
+              <FormControlLabel
+                value="whileUsing"
+                control={<Radio sx={{ color: "#f6c301", "&.Mui-checked": { color: "#f6c301" } }} />}
+                label="Allow camera access while using the app"
+              />
+              <FormControlLabel
+                value="always"
+                control={<Radio sx={{ color: "maroon", "&.Mui-checked": { color: "maroon" } }} />}
+                label="Allow camera access always"
+              />
+              <FormControlLabel
+                value="never"
+                control={<Radio sx={{ color: "gray", "&.Mui-checked": { color: "gray" } }} />}
+                label="Never allow camera access"
+              />
+            </RadioGroup>
+          </FormControl>
+        </DialogContent>
+      </Dialog>
 
 
       <Dialog open={isCommentDialogOpen} onClose={handleCloseComments}>
@@ -833,19 +842,19 @@ const handleClosePost = () => {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a comment..."
-              style={{ 
-                flexGrow: 1, 
-                marginRight: '10px', 
-                padding: '8px', 
-                border: '1px solid #ccc', 
-                borderRadius: '4px' 
+              style={{
+                flexGrow: 1,
+                marginRight: '10px',
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '4px'
               }}
             />
-            <Button 
+            <Button
               onClick={handleAddComment}
               variant="contained"
-              sx={{ 
-                backgroundColor: '#8A252C', 
+              sx={{
+                backgroundColor: '#8A252C',
                 color: 'white',
                 '&:hover': {
                   backgroundColor: '#f9d67b',
