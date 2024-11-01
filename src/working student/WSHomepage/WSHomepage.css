@@ -54,6 +54,25 @@ body {
   color: #8a252c;
 }
 
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  right: 1.6rem;
+  margin-top: 0rem;
+  width: 8rem;
+  background-color: #fdfdd7;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 12px;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 /* Title */
 .WSTitle {
   width: 115px;

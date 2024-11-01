@@ -579,6 +579,8 @@ const WSHomepage = () => {
 
   const fileInputRef = useRef(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="ws-homepage">
       <div className="WSNavbar">
@@ -599,11 +601,31 @@ const WSHomepage = () => {
           </div>
         </div>
         {/* Toggle Navigation Button for mobile */}
-        <button className="nav-toggle">
+        <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="nav-toggle-icon">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
           </svg>
         </button>
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="mobile-menu">
+            <div className="mobile-menu-links">
+              <b className="NHome-mobile">Home</b>
+              <div className="NReports-mobile" onClick={onREPORTSClick}>
+                Report
+              </div>
+              <div className="NProfile-mobile" onClick={onPROFILEClick}>
+                Profile
+              </div>
+              <div className="NLeaderboards-mobile" onClick={onLEADERBOARDSClick}>
+                Leaderboard
+              </div>
+              <div className="NInsight-mobile" onClick={onINSIGHTClick}>
+                Insight
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <b className="HWildcat">WILDCAT</b>
 

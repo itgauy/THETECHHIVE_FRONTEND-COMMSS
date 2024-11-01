@@ -162,6 +162,8 @@ const WSProfile = ({ className = "" }) => {
   //   return null;
   // }
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <div className={`ws-profile ${className}`}>
@@ -175,11 +177,23 @@ const WSProfile = ({ className = "" }) => {
             <div className="NLeaderboards" onClick={onLeaderboardsTextClick}>Leaderboard</div>
           </div>
           {/* Toggle Navigation Button for mobile */}
-          <button className="nav-toggle">
+          <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="nav-toggle-icon">
               <path fillRule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
             </svg>
           </button>
+          {/* Mobile Dropdown Menu */}
+          {isOpen && (
+            <div className="mobile-menu">
+              <div className="mobile-menu-links">
+                <div className="NHome-mobile" onClick={onHomeTextClick}>Home</div>
+                <div className="NReports-mobile" onClick={onReportsTextClick}>Report</div>
+                <div className="NInsight-mobile" onClick={onINSIGHTClick}>Insight</div>
+                <b className="NProfile-mobile">Profile</b>
+                <div className="NLeaderboards-mobile" onClick={onLeaderboardsTextClick}>Leaderboard</div>
+              </div>
+            </div>
+          )}
         </div>
         <img className="WSProfileBg" alt="" src="/profilebg.png" />
         <div className="ProfilePictureContainer">
