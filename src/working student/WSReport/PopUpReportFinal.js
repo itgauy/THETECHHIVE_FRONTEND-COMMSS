@@ -611,7 +611,7 @@ const PopUpReportFinal = ({ onBack, onClose, locationDenied = false, onLocationR
           variant="contained"
           sx={{
             position: "absolute",
-            top: "580px",
+            top: "570px",
             bottom: "60px",
             left: "50%",
             transform: "translateX(-50%)",

@@ -1,22 +1,22 @@
 .ws-report {
-    width: 100%;
-    position: relative;
-    height: 729px;
-    overflow: hidden;
-    text-align: left;
-    color: #8a252c;
-    font-family: var(--font-montserrat);
+  width: 100%;
+  position: relative;
+  height: 729px;
+  overflow: hidden;
+  text-align: left;
+  color: #8a252c;
+  font-family: var(--font-montserrat);
 }
- 
+
 .bg2-expanded {
-    position: absolute;
-    left: 0;
-    top: -582px;
-    height: 1414px;
-    object-fit: cover;
-    width: 100%;
+  position: absolute;
+  left: 0;
+  top: -582px;
+  height: 1414px;
+  object-fit: cover;
+  width: 100%;
 }
- 
+
 .IncidentReport-Pic {
   position: absolute;
   top: 90px;
@@ -108,7 +108,7 @@
   }
 
   .INReport:hover {
-    transform: translateX(-50%) scale(1.05); 
+    transform: translateX(-50%) scale(1.05);
     transition: transform 0.3s ease;
   }
 }
@@ -118,8 +118,8 @@
     top: 20% !important;
     left: 50%;
     transform: translateX(-50%);
-    width: 50%;
-    height: 18%;
+    width: 48%;
+    height: 14%;
     object-fit: cover;
   }
 
@@ -145,12 +145,12 @@
     top: 70% !important;
     left: 50%;
     transform: translateX(-50%);
-    width: 25%;
-    height: 15%;
+    width: 30%;
+    height: 13%;
+    padding: 0.3rem;
     object-fit: cover;
     text-align: center;
     transition: none;
     position: absolute;
   }
 }
-
