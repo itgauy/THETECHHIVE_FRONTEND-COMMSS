@@ -190,7 +190,7 @@ const WSInsightAnalytics = () => {
         <img className="arrow_right" alt="" src="/WsInsight_Rightbtn.png" onClick={incrementYear} />
       </div>
 
-      <div className="BarGraphContainer" >
+      <div className="BarGraphContainer">
         <div className="BarBox" />
         <span className='MonthlyAccidentEventStats'>Monthly Accident & Event Stats<br /> </span>
         <div className="BarGraph" style={{ height: '280px', width: '83%' }}>
