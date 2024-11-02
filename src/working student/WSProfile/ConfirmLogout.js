@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect  } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import "./ConfirmLogout.css";
@@ -14,11 +14,11 @@ const ConfirmLogout = ({ onClose }) => {
 
   const onCANCELTextClick = useCallback(() => {
     console.log("Cancel button clicked");
-  if (typeof onClose === 'function') {
-    onClose();
-  }
-  setIsOpen(false);
-}, [onClose]);
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+    setIsOpen(false);
+  }, [onClose]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -48,56 +48,56 @@ const ConfirmLogout = ({ onClose }) => {
           src="wildcat-crying.png"
         />
 
-<div className="LogoutPopUpContainer">
-  <Button
-    className="LogoutButton"
-    variant="contained"
-    sx={{
-      borderRadius: "10px",
-      width: 110,
-      height: 35,
-      backgroundColor: "#8A252C",
-      "&:hover": { 
-        backgroundColor: "#A91D3A",
-        transform: "scale(1.1)",
-        transition: "transform 0.3s ease"  // Added for smooth transition
-      },
-      fontSize: "15px",
-      fontWeight: "bold",
-      color: "white",
-    }}
-    onClick={onLOGOUTTextClick}
-  >
-    LOG OUT
-  </Button>
-</div>
+        <div className="LogoutPopUpContainer">
+          <Button
+            className="LogoutButton"
+            variant="contained"
+            sx={{
+              borderRadius: "10px",
+              width: 110,
+              height: 35,
+              backgroundColor: "#8A252C",
+              "&:hover": {
+                backgroundColor: "#A91D3A",
+                transform: "scale(1.1)",
+                transition: "transform 0.3s ease"  // Added for smooth transition
+              },
+              fontSize: "15px",
+              fontWeight: "bold",
+              color: "white",
+            }}
+            onClick={onLOGOUTTextClick}
+          >
+            LOG OUT
+          </Button>
+        </div>
 
         <div className="CancelButtonContainer">
-  <Button
-    className="CancelButton"
-    variant="contained"
-    sx={{
-      borderRadius: "10px",
-      width: 110,
-      height: 35,
-      backgroundColor: "#8A252C",
-      "&:hover": { 
-        backgroundColor: "#A91D3A",
-        transform: "scale(1.1)",
-        transition: "transform 0.3s ease"  // Added for smooth transition
-      },
-      fontSize: "15px",
-      fontWeight: "bold",
-      color: "white",
-    }}
-    onClick={onCANCELTextClick}
-  >
-    CANCEL
-  </Button>
-</div>
-</div>
-</div>
- );
+          <Button
+            className="LogoutButton"
+            variant="contained"
+            sx={{
+              borderRadius: "10px",
+              width: 110,
+              height: 35,
+              backgroundColor: "#8A252C",
+              "&:hover": {
+                backgroundColor: "#A91D3A",
+                transform: "scale(1.1)",
+                transition: "transform 0.3s ease"  // Added for smooth transition
+              },
+              fontSize: "15px",
+              fontWeight: "bold",
+              color: "white",
+            }}
+            onClick={onCANCELTextClick}
+          >
+            CANCEL
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ConfirmLogout;
