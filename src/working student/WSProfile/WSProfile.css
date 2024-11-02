@@ -525,6 +525,7 @@
     width: 180px !important;
     height: 295px !important;
     padding: 20px !important;
+    margin-top: 0.6rem;
   }
 
   .PasswordName {
@@ -550,24 +551,24 @@
   .OldPassInput {
     top: 300px !important;
     left: 56% !important;
-    height: 16px !important;
+    height: 20px !important;
   }
 
   .NewPassInput {
     top: 375px !important;
     left: 56% !important;
-    height: 16px !important;
+    height: 20px !important;
   }
 
   .edit {
-    top: 425px !important;
-    left: 310px !important;
+    top: 400px !important;
+    left: 255px !important;
     font-size: 13px !important;
   }
 
   .UpdateContainer {
-    top: 420px !important;
-    left: 355px !important;
+    top: 450px !important;
+    left: 213px !important;
   }
 
   .profile-update-success-modal {
