@@ -1,7 +1,7 @@
 .loadingbarpage2 {
   width: 100%;
   position: relative;
-  height: auto;
+  height: 100vh;
   /* Change to auto for flexible height */
   min-height: 729px;
   /* Maintain a minimum height */

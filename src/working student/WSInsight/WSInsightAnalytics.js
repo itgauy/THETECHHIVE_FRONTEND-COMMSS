@@ -324,7 +324,7 @@ const WSInsightAnalytics = () => {
                 </div>
 
                 <div className='_7'>
-                  <span className='_20240116_1'>2024-01-16 | 10:05 AM</span>
+                  <span className='_20240116_1'>2024-01-16</span>
                 </div>
 
                 <div className='_8'>
@@ -339,7 +339,7 @@ const WSInsightAnalytics = () => {
                 </div>
 
                 <div className='_12'>
-                  <span className='_20240116_3'>2024-01-16 | 10:05 AM</span>
+                  <span className='_20240116_3'>2024-01-16</span>
                 </div>
 
                 <div className='_13'>
