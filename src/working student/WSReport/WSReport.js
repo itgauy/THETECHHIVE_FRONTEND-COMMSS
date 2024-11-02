@@ -51,14 +51,14 @@ const WSReport = () => {
               Home
             </div>
             <b className="NReports">Report</b>
-            <div className="NProfile" onClick={onPROFILEClick}>
-              Profile
-            </div>
             <div className="NLeaderboards" onClick={onLEADERBOARDSClick}>
               Leaderboard
             </div>
             <div className="NInsight" onClick={onINSIGHTClick}>
               Insight
+            </div>
+            <div className="NProfile" onClick={onPROFILEClick}>
+              Profile
             </div>
           </div>
           {/* Toggle Navigation Button for mobile */}
@@ -75,14 +75,14 @@ const WSReport = () => {
                   Home
                 </div>
                 <b className="NReports-mobile">Report</b>
-                <div className="NProfile-mobile" onClick={onPROFILEClick}>
-                  Profile
-                </div>
                 <div className="NLeaderboards-mobile" onClick={onLEADERBOARDSClick}>
                   Leaderboard
                 </div>
                 <div className="NInsight-mobile" onClick={onINSIGHTClick}>
                   Insight
+                </div>
+                <div className="NProfile-mobile" onClick={onPROFILEClick}>
+                  Profile
                 </div>
               </div>
             </div>

@@ -79,9 +79,9 @@ const WSLeaderboards = () => {
         <div className="nav-links">
           <div className="NHome" onClick={onHomeTextClick}>Home</div>
           <div className="NReports" onClick={onREPORTSClick}>Report</div>
+          <b className="NLeaderboards">Leaderboard</b>
           <div className="NInsight" onClick={onINSIGHTClick}>Insight</div>
           <div className="NProfile" onClick={onPROFILEClick}>Profile</div>
-          <b className="NLeaderboards">Leaderboard</b>
         </div>
         {/* Toggle Navigation Button for mobile */}
         <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
@@ -95,9 +95,9 @@ const WSLeaderboards = () => {
             <div className="mobile-menu-links">
               <div className="NHome-mobile" onClick={onHomeTextClick}>Home</div>
               <div className="NReports-mobile" onClick={onREPORTSClick}>Report</div>
+              <b className="NLeaderboards-mobile">Leaderboard</b>
               <div className="NInsight-mobile" onClick={onINSIGHTClick}>Insight</div>
               <div className="NProfile-mobile" onClick={onPROFILEClick}>Profile</div>
-              <b className="NLeaderboards-mobile">Leaderboard</b>
             </div>
           </div>
         )}

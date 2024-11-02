@@ -250,11 +250,12 @@
 .Image-Preview-Container {
   position: absolute;
   top: 440px;
-  left: 243px;
+  left: 117px;
   display: flex;
+  justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
-  width: calc(100% - 278px);
+  width: 23rem;
   padding-bottom: 10px;
 }
 

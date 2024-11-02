@@ -172,9 +172,9 @@ const WSProfile = ({ className = "" }) => {
           <div className="nav-links">
             <div className="NHome" onClick={onHomeTextClick}>Home</div>
             <div className="NReports" onClick={onReportsTextClick}>Report</div>
+            <div className="NLeaderboards" onClick={onLeaderboardsTextClick}>Leaderboard</div>
             <div className="NInsight" onClick={onINSIGHTClick}>Insight</div>
             <b className="NProfile">Profile</b>
-            <div className="NLeaderboards" onClick={onLeaderboardsTextClick}>Leaderboard</div>
           </div>
           {/* Toggle Navigation Button for mobile */}
           <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
@@ -188,9 +188,9 @@ const WSProfile = ({ className = "" }) => {
               <div className="mobile-menu-links">
                 <div className="NHome-mobile" onClick={onHomeTextClick}>Home</div>
                 <div className="NReports-mobile" onClick={onReportsTextClick}>Report</div>
+                <div className="NLeaderboards-mobile" onClick={onLeaderboardsTextClick}>Leaderboard</div>
                 <div className="NInsight-mobile" onClick={onINSIGHTClick}>Insight</div>
                 <b className="NProfile-mobile">Profile</b>
-                <div className="NLeaderboards-mobile" onClick={onLeaderboardsTextClick}>Leaderboard</div>
               </div>
             </div>
           )}

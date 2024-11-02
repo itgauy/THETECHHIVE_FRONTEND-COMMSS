@@ -590,14 +590,14 @@ const WSHomepage = () => {
           <div className="NReports" onClick={onREPORTSClick}>
             Report
           </div>
-          <div className="NProfile" onClick={onPROFILEClick}>
-            Profile
-          </div>
           <div className="NLeaderboards" onClick={onLEADERBOARDSClick}>
             Leaderboard
           </div>
           <div className="NInsight" onClick={onINSIGHTClick}>
             Insight
+          </div>
+          <div className="NProfile" onClick={onPROFILEClick}>
+            Profile
           </div>
         </div>
         {/* Toggle Navigation Button for mobile */}
@@ -614,14 +614,14 @@ const WSHomepage = () => {
               <div className="NReports-mobile" onClick={onREPORTSClick}>
                 Report
               </div>
-              <div className="NProfile-mobile" onClick={onPROFILEClick}>
-                Profile
-              </div>
               <div className="NLeaderboards-mobile" onClick={onLEADERBOARDSClick}>
                 Leaderboard
               </div>
               <div className="NInsight-mobile" onClick={onINSIGHTClick}>
                 Insight
+              </div>
+              <div className="NProfile-mobile" onClick={onPROFILEClick}>
+                Profile
               </div>
             </div>
           </div>
