@@ -311,6 +311,13 @@
   margin-top: 5rem;
 }
 
+.error-message-1 {
+  color: #d32f2f;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  margin-top: 3rem;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -658,8 +665,8 @@
     color: #d32f2f;
     font-size: 15px;
     font-family: "Montserrat", sans-serif;
-    margin-top: 4rem;
     text-wrap: wrap;
+    border: 1px red solid;
     width: 80%;
     margin-left: 1rem;
   }

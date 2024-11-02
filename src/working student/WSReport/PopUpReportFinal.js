@@ -612,7 +612,6 @@ const PopUpReportFinal = ({ onBack, onClose, locationDenied = false, onLocationR
           sx={{
             position: "absolute",
             top: "570px",
-            bottom: "60px",
             left: "50%",
             transform: "translateX(-50%)",
             borderRadius: "10px",
@@ -637,7 +636,7 @@ const PopUpReportFinal = ({ onBack, onClose, locationDenied = false, onLocationR
         {Object.keys(validationErrors).length > 0 && (
           <div className="validation-errors-container">
             {validationErrors.general ? (
-              <div className="error-message">{validationErrors.general}</div>
+              <div className="error-message-1">{validationErrors.general}</div>
             ) : (
               <>
                 {validationErrors.description && <div className="error-message">{validationErrors.description}</div>}
