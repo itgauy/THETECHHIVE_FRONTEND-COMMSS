@@ -4,7 +4,7 @@
   background: linear-gradient(180deg, #fdfbc9 54.1%, #f9d67b);
   min-height: 841px; /* Minimum height for the container */
   overflow: hidden; /* Hide overflow of the main container */
-  text-align: left;
+  text-align: center;
   color: #8a252c;
   font-family: var(--font-montserrat);
 }
@@ -20,18 +20,20 @@
 
 .leaderboard-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+  gap: 1.2rem;
   margin-top: 260px; /* Maintain space for the title */
 }
 
 .leaderboard-column {
-  flex: 1; /* Equal width for each column */
+  flex: auto;
   margin: 0 10px;
   text-align: center;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  padding-bottom: 20px; 
+  padding-bottom: 20px;
   min-height: 200px; /* Minimum height to maintain space even when empty */
   overflow-y: auto; /* Allow scrolling within the column if needed */
 }
@@ -40,19 +42,19 @@
   background-color: #f4d1d3;
   padding: 10px;
   border-radius: 20px 20px 0 0;
-  margin: 0; 
+  margin: 0;
 }
 
 .champion-column {
-  background-color: #f5fffa; 
+  background-color: #f5fffa;
 }
 
 .prowler-column {
-  background-color: #f5fffa; 
+  background-color: #f5fffa;
 }
 
 .cub-column {
-  background-color: #f5fffa; 
+  background-color: #f5fffa;
 }
 
 .leaderboard-card {
@@ -104,7 +106,7 @@
 }
 
 .gold-background {
-  background-color: #FFD700; /* Gold background for trophies */
+  background-color: #ffd700; /* Gold background for trophies */
   border-radius: 50%; /* Ensure it stays circular */
   width: 60px; /* Increase width for the circle */
   height: 60px; /* Increase height for the circle */
@@ -114,7 +116,7 @@
 }
 
 .bronze-background {
-  background-color: #CD7F32; /* Bronze background for trophies */
+  background-color: #cd7f32; /* Bronze background for trophies */
   border-radius: 50%; /* Ensure it stays circular */
   width: 60px; /* Increase width for the circle */
   height: 60px; /* Increase height for the circle */
@@ -124,7 +126,7 @@
 }
 
 .silver-background {
-  background-color: #C0C0C0; /* Silver background for trophies */
+  background-color: #c0c0c0; /* Silver background for trophies */
   border-radius: 50%; /* Ensure it stays circular */
   width: 60px; /* Increase width for the circle */
   height: 60px; /* Increase height for the circle */
@@ -133,42 +135,53 @@
   justify-content: center; /* Center icon horizontally */
 }
 
+@media (max-width: 500px) {
+  .LeaderboardsTitle {
+    position: absolute;
+    top: 71px;
+    left: 20px;
+    width: 60% !important;
+    height: 231px;
+    object-fit: cover;
+  }
+}
+
 @media (max-width: 768px) {
   .LeaderboardsTitle {
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30%;
-      height: 18%;
-      object-fit: cover;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 18%;
+    object-fit: cover;
   }
 
   .WSLeaderboardsBox {
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85%;
-      height: 50%;
-      object-fit: cover;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 50%;
+    object-fit: cover;
   }
 }
 
 @media (max-width: 500px) {
   .LeaderboardsTitle {
-      top: 10% !important;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50%;
-      height: 18%;
-      object-fit: cover;
+    top: 10% !important;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 18%;
+    object-fit: cover;
   }
 
   .WSLeaderboardsBox {
-      top: 30% !important;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85%;
-      height: 50%;
-      object-fit: cover;
+    top: 30% !important;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 50%;
+    object-fit: cover;
   }
 }
